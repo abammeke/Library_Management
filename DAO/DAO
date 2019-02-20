@@ -1,0 +1,85 @@
+package DOA;
+
+import Entity.User;
+
+import java.sql.*;
+import java.util.Collection;
+
+public class DAO {
+
+DBConnect Database;
+    {
+        try {
+            Database.getConnections();// = new DBConnect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+private Connection con = Database.getConnections();
+
+    public boolean Authenticate(String username, String password){
+    String sql = "SELECT * FROM user WHERE username=? AND password=?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+      }
+//SIGN UP
+      public void SingUP(String firstName, String middleName, String lastName, String username, String password,
+                         String sex, String occupation, String address, String phone, int age){
+          String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+          try {
+              PreparedStatement st = con.prepareStatement(sql);
+              st.setString(1, firstName);
+              st.setString(2, middleName);
+              st.setString(3, lastName);
+              st.setString(4, username);
+              st.setString(5, password);
+              st.setString(6, sex);
+              st.setString(7, occupation);
+              st.setString(8, address);
+              st.setString(9, phone);
+              st.setInt(10, age);
+              st.executeUpdate();
+              System.out.println("Sign up successful");
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+    }
+
+   //USER PROFILE
+    public  User someoneProfile(String usernames){
+        User thisUser = null;
+        String sql = "SELECT * FROM user WHERE username=?";
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, usernames);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                thisUser = new User(rs.getString("firstName"),
+                        rs.getString("middleName"),
+                        rs.getString("lastName"),
+                        rs.getString("address"),
+                        rs.getString("sex"),
+                        rs.getString("occupation"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("phone"),
+                        rs.getInt("age"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return thisUser;
+    }
+}
