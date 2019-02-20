@@ -1,0 +1,6 @@
+body{background-color: tomato;}
+div{background-color: ivory; border: 4px solid black;
+border-radius: 5px;}
+#lol{
+    color:red;
+}
