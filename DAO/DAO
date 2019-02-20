@@ -34,7 +34,7 @@ private Connection con = Database.getConnections();
         }
         return false;
       }
-//SIGN UP
+//SIGN UP 
       public void SingUP(String firstName, String middleName, String lastName, String username, String password,
                          String sex, String occupation, String address, String phone, int age){
           String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
