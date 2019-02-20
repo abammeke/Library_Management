@@ -1,0 +1,24 @@
+$(document).ready(function () {
+    $("#myprofile").click(function () {
+        alert("This is now working now");
+        $.get('MyProfile');
+
+    });
+    //logout
+    $("#logoutlink").click(function () {
+        alert("you have succesfully log out ni");
+        //$(sessionStorage).getAttribute("username");
+        console.log(sessionStorage.getAttribute("user"));
+      // sessionStorage.removeItem("user");
+      //  console.log(sessionStorage.getItem("user"));
+      //  console.log(sessionStorage.getItem("username"));
+       //window.close();
+       // var sessions = session.getItem("username");   //$.sessionStorage.getItem("username");
+         //sessions.clear;
+       // window.location="LoginPage.jsp";
+
+
+
+    });
+
+});
